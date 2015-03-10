@@ -22,6 +22,11 @@
     <url>https://github.com/warmuuh/libsass-maven-plugin</url>
   </scm>
 
+  <properties>
+    <!-- Maven extensions versions -->
+    <wagon-webdav.version>1.0-beta-2</wagon-webdav.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>net.java.dev.jna</groupId>
@@ -83,5 +88,30 @@
         </plugin>
     </plugins>
 
+    <extensions>
+      <!-- Default extension for deploying the Artifacts -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav</artifactId>
+        <version>${wagon-webdav.version}</version>
+      </extension>
+    </extensions>
+
   </build>
+  
+  <distributionManagement>
+    <repository>
+      <id>nexus-releases</id>
+      <name>Internal Release Repository</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>dav:https://dev-tools.info.swissquote.ch:8082/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <name>Internal Snapshot Repository</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>dav:https://dev-tools.info.swissquote.ch:8082/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>
